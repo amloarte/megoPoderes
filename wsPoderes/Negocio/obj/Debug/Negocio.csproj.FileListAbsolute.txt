@@ -1,0 +1,4 @@
+D:\REPOSITORIOS\PODERES\wsPoderes\Negocio\bin\Debug\Negocio.dll
+D:\REPOSITORIOS\PODERES\wsPoderes\Negocio\bin\Debug\Negocio.pdb
+D:\REPOSITORIOS\PODERES\wsPoderes\Negocio\obj\Debug\Negocio.dll
+D:\REPOSITORIOS\PODERES\wsPoderes\Negocio\obj\Debug\Negocio.pdb

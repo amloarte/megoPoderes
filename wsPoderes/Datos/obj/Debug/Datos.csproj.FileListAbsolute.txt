@@ -1,0 +1,6 @@
+D:\REPOSITORIOS\PODERES\wsPoderes\Datos\bin\Debug\Datos.dll
+D:\REPOSITORIOS\PODERES\wsPoderes\Datos\bin\Debug\Datos.pdb
+D:\REPOSITORIOS\PODERES\wsPoderes\Datos\obj\Debug\Datos.csprojAssemblyReference.cache
+D:\REPOSITORIOS\PODERES\wsPoderes\Datos\obj\Debug\Datos.dll
+D:\REPOSITORIOS\PODERES\wsPoderes\Datos\obj\Debug\Datos.pdb
+D:\REPOSITORIOS\PODERES\wsPoderes\Datos\bin\Debug\Datos.dll.config
