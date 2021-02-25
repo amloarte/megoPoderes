@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { LayoutService } from '../../../../_metronic/core';
+import { LayoutService } from '../../../../_theme/core';
 import KTLayoutFooter from '../../../../../assets/js/layout/base/footer';
 
 @Component({

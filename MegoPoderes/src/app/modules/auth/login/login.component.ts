@@ -1,10 +1,11 @@
+import { Respuesta } from './../_models/Respuesta';
+import { LoginService } from './../_services/login.service';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { UserModel } from '../_models/user.model';
-import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as SparkMD5 from 'spark-md5';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +13,21 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
+
+  respuesta: Respuesta;
+  mensajeError = '';
+
   // KeenThemes mock, change it to:
-  // defaultAuth = {
-  //   email: '',
-  //   password: '',
-  // };
-  defaultAuth: any = {
-    email: 'admin@demo.com',
-    password: 'demo',
+  defaultAuth = {
+    email: '',
+    password: '',
   };
+  // defaultAuth: any = {
+  //   email: 'admin@demo.com',
+  //   password: 'demo',
+  // };
   loginForm: FormGroup;
-  hasError: boolean;
+  hasError = false;
   returnUrl: string;
   isLoading$: Observable<boolean>;
 
@@ -31,7 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    private authService: LoginService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -46,8 +51,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.initForm();
     // get return url from route parameters or default to '/'
     this.returnUrl =
-        this.route.snapshot.queryParams['returnUrl'.toString()] || '/';
-    }
+      this.route.snapshot.queryParams['returnUrl'.toString()] || '/';
+  }
 
   // convenience getter for easy access to form fields
   get f() {
@@ -60,38 +65,124 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.defaultAuth.email,
         Validators.compose([
           Validators.required,
-          Validators.email,
-          Validators.minLength(3),
-          Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+          Validators.minLength(5),
+          Validators.maxLength(25)
         ]),
       ],
       password: [
         this.defaultAuth.password,
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(1),
           Validators.maxLength(100),
         ]),
       ],
     });
   }
 
-  submit() {
+  // .pipe(first())
+  async submit() {
     this.hasError = false;
-    const loginSubscr = this.authService
-      .login(this.f.email.value, this.f.password.value)
-      .pipe(first())
-      .subscribe((user: UserModel) => {
-        if (user) {
-          this.router.navigate([this.  returnUrl]);
-        } else {
-          this.hasError = true;
-        }
+    const pass = SparkMD5.hash( this.f.password.value );
+    this.authService.login(this.f.email.value, pass)
+      .then((resp: any) => {
+
+        this.respuesta = resp;
+        this.validarLogin(this.respuesta.codigo, this.respuesta.mensajes);
+
+      }).catch(err => {
+
+        this.hasError = true;
+        this.mensajeError = 'Actualmente no puede ingresar al sistema. Intente mas tarde';
+        console.log(err);
+
       });
-    this.unsubscribe.push(loginSubscr);
+  }
+
+  validarLogin(codigo: string, mensajes: Array<string>): void {
+    let mensajeLogin: string;
+    let mensajeCaducaPassword: string;
+
+    switch (codigo) {
+      case 'L1': {
+
+        if (mensajes.length > 1) {
+          mensajeCaducaPassword = mensajes[0];
+          mensajeLogin = mensajes[1];
+          alert(mensajeCaducaPassword);
+        } else {
+          mensajeLogin = mensajes[0];
+        }
+
+        const splitLogLogin = mensajeLogin.split('|');
+        const mensajeLogLogin = splitLogLogin[0] + '\n\n' + splitLogLogin[1] + '\n' + splitLogLogin[2] + '\n' + splitLogLogin[3];
+        alert(mensajeLogLogin);
+
+        this.router.navigate(['/dashboard']);
+        break;
+
+      }
+      case 'L2': {
+        alert(mensajes);
+        alert('Contraseña Caducada');
+        break;
+      }
+      case 'L3': {
+
+        if (mensajes.length > 1) {
+          mensajeCaducaPassword = mensajes[0];
+          mensajeLogin = mensajes[1];
+          alert(mensajeCaducaPassword);
+        } else {
+          mensajeLogin = mensajes[0];
+        }
+
+        const splitLogLogin = mensajeLogin.split('|');
+        const mensajeLogLogin = splitLogLogin[0] + '\n\n' + splitLogLogin[1] + '\n' + splitLogLogin[2] + '\n' + splitLogLogin[3];
+        alert(mensajeLogLogin);
+
+        this.router.navigate(['/dashboard']);
+        break;
+      }
+      case 'L4': {
+
+        if (mensajes.length > 1) {
+          mensajeCaducaPassword = mensajes[0];
+          mensajeLogin = mensajes[1];
+          alert(mensajeCaducaPassword);
+        } else {
+          mensajeLogin = mensajes[0];
+        }
+
+        const splitLogLogin = mensajeLogin.split('|');
+        const log = splitLogLogin[0] + '\n\n' + splitLogLogin[1] + '\n' + splitLogLogin[2] + '\n' + splitLogLogin[3];
+        alert(log);
+
+        this.router.navigate(['/perfiles']);
+        break;
+
+      }
+      case 'L5': {
+
+        this.mensajeError = mensajes[0];
+        break;
+
+      }
+      case 'L6': {
+
+        this.mensajeError = mensajes[0];
+        this.hasError = true;
+        break;
+
+      }
+      default: {
+        break;
+      }
+    }
   }
 
   ngOnDestroy() {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
+
 }
