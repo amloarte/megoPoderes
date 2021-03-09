@@ -19,7 +19,6 @@
             #ktAside
             id="kt_aside"
             class="aside aside-left d-flex flex-column flex-row-auto"
-            [ngClass]="asideCSSClasses"
           ></app-aside>
           <!--end::STATIC Aside-->
         </ng-container>
@@ -37,11 +36,9 @@
       <!-- end:: Aside Left -->
 
       <!--begin::Wrapper-->
-      <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+      <div class="d-flex flex-column flex-row-fluid wrapper" >
         <!-- begin:: Header -->
         <app-header
-          #ktHeader
-          id="kt_header"
           class="header"
           [ngClass]="headerCSSClasses"
         ></app-header>

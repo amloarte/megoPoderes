@@ -26,25 +26,24 @@
         >Registro del otorgamiento al beneficiario</mat-card-subtitle
       >
       <mat-card-content>
-        <form>
+        <form [formGroup]="fomularioRegistro">
           <div class="row">
             <div class="col-md-3">
               <mat-form-field>
                 <mat-select
-                  [formControl]="select" required
                   placeholder="Seleccione Pais"
-                  [(ngModel)]="selectedValue"
+                  name="selectPaises"
+                  
                   (change)="selectCascada('provincia', selectedValue)"
                 >
                   <mat-option> -SELECCIONE- </mat-option>
                   <mat-option *ngFor="let pais of paises"
                     [value]="pais.codigo"
-                    
                   >
                     {{ pais.pais }}
                   </mat-option>
                 </mat-select>
-                <mat-error *ngIf="select.hasError('required')">Seleccione provincia <span>*</span></mat-error>
+                <mat-error >Seleccione pais <strong>*</strong></mat-error>
               </mat-form-field>
 
               <mat-form-field>

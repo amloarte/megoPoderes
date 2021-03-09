@@ -51,6 +51,7 @@ import {
   MatNativeDateModule,
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -58,6 +59,11 @@ const routes: Routes = [
     path: '',
     component: PoderesComponent,
     children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
       {
         path: 'registro',
         component: RegistroComponent,
@@ -71,9 +77,8 @@ const routes: Routes = [
         component: ValidacionComponent,
       },
       {
-        path: '',
-        redirectTo: 'registro',
-        pathMatch: 'full'
+        path: 'dashboard',
+        component: DashboardComponent,
       },
       {
         path: '**',
@@ -89,7 +94,8 @@ const routes: Routes = [
     RegistroComponent,
     AdministracionComponent,
     ValidacionComponent,
-    FormularioPersonaComponent
+    FormularioPersonaComponent,
+    DashboardComponent
   ],
   providers: [
     { provide: MatBottomSheetRef, useValue: {} },

@@ -14,8 +14,6 @@ export class RegistroComponent implements OnInit {
   provincias: [] = [];
   fomularioRegistro: FormGroup;
   oficinas: [] = [];
-  select = new FormControl('', Validators.required);
-
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,23 +21,24 @@ export class RegistroComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.fomularioRegistro = this.formBuilder.group({
-      paises: new FormControl(this.paises, Validators.required)
+      paises: new FormControl(this.paises, Validators.required),
+      selectPaises: new FormControl('seleccione pais', Validators.required),
+      fechaOtorgamiento: new FormControl('', Validators.required)
     });
 
     this.selectCascada('paises', '0');
     this.getCatalogos('oficina', '0');
-    this.getCatalogos('oficina', '0');
 
-    this.serviceCatalogos.getParametros('FACULTADES_PODERES').then((resp) => {
-      console.log(resp);
-    });
+    // this.serviceCatalogos.getParametros('FACULTADES_PODERES').then((resp) => {
+    //   console.log(resp);
+    // });
   }
 
 
   selectCascada(nombre: string, filtro: string) {
     this.serviceCatalogos.getCatalogos(nombre, filtro).then((resp: []) => {
-      console.log(resp);
       this.paises = resp;
     });
   }

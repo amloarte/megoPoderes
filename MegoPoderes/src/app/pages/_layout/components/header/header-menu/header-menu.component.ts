@@ -1,9 +1,9 @@
-import { SubheaderService } from './../../../../../_theme/partials/layout/subheader/_services/subheader.service';
-import { BreadcrumbItemModel } from './../../../../../_theme/partials/layout/subheader/_models/breadcrumb-item.model';
-import { Observable } from 'rxjs';
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { LayoutService } from '../../../../../_theme/core';
+import { KTUtil } from '../../../../../../assets/js/components/util';
+import KTLayoutHeader from '../../../../../../assets/js/layout/base/header';
+import KTLayoutHeaderMenu from '../../../../../../assets/js/layout/base/header-menu';
 
 @Component({
   selector: 'app-header-menu',
@@ -11,41 +11,32 @@ import { LayoutService } from '../../../../../_theme/core';
   styleUrls: ['./header-menu.component.scss'],
 })
 export class HeaderMenuComponent implements OnInit {
-  subheaderCSSClasses = '';
-  subheaderContainerCSSClasses = '';
-  subheaderMobileToggle = false;
-  subheaderDisplayDesc = false;
-  subheaderDisplayDaterangepicker = false;
-  title$: Observable<string>;
-  breadcrumbs$: Observable<BreadcrumbItemModel[]>;
-  breadcrumbs: BreadcrumbItemModel[] = [];
-  description$: Observable<string>;
-  @Input() title: string;
+  ulCSSClasses: string;
+  rootArrowEnabled: boolean;
+  headerMenuDesktopToggle: string;
+  @ViewChild('ktHeaderMenu', { static: true }) ktHeaderMenu: ElementRef;
 
-  constructor(
-    private layout: LayoutService,
-    private subheader: SubheaderService,
-    private cdr: ChangeDetectorRef
-  ) {
-    this.title$ = this.subheader.titleSubject.asObservable();
-  }
+  constructor() {}
 
-  ngOnInit() {
-    this.title$ = this.subheader.titleSubject.asObservable();
-    this.breadcrumbs$ = this.subheader.breadCrumbsSubject.asObservable();
-    this.description$ = this.subheader.descriptionSubject.asObservable();
-    this.subheaderCSSClasses = this.layout.getStringCSSClasses('subheader');
-    this.subheaderContainerCSSClasses = this.layout.getStringCSSClasses(
-      'subheader_container'
-    );
-    this.subheaderMobileToggle = this.layout.getProp('subheader.mobileToggle');
-    this.subheaderDisplayDesc = this.layout.getProp('subheader.displayDesc');
-    this.subheaderDisplayDaterangepicker = this.layout.getProp(
-      'subheader.displayDaterangepicker'
-    );
-    this.breadcrumbs$.subscribe((res) => {
-      this.breadcrumbs = res;
-      this.cdr.detectChanges();
+  ngOnInit(): void { }
+  
+  ngAfterViewInit(): void {
+    console.log(this.ktHeaderMenu)
+    if (this.ktHeaderMenu) {
+      // for (const key in this.headerMenuHTMLAttributes) {
+      //   if (this.headerMenuHTMLAttributes.hasOwnProperty(key)) {
+      //     this.ktHeaderMenu.nativeElement.attributes[
+      //       key
+      //     ] = this.headerMenuHTMLAttributes[key];
+      //   }
+      // }
+    }
+
+    KTUtil.ready(() => {
+      // Init Desktop & Mobile Headers
+      KTLayoutHeader.init('kt_header', 'kt_header_mobile');
+      // Init Header Menu
+      KTLayoutHeaderMenu.init('kt_header_menu', 'kt_header_menu_wrapper');
     });
-  }  
+  }
 }

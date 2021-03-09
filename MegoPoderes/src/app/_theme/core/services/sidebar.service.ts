@@ -28,6 +28,7 @@ export class SidebarService {
     const url = URL_SERVICIOS + '/api/funcionalidades/get_menu_principal';
     return new Promise((resolve, reject) => {
       this.http.get(url, { params })
+        // tslint:disable-next-line: deprecation
         .subscribe((resp: any) => {
 
           this.funcionalidadesPadre = resp;

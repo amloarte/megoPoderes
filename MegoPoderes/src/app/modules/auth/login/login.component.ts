@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    localStorage.clear();
     this.initForm();
     // get return url from route parameters or default to '/'
     this.returnUrl =
@@ -118,7 +119,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         const mensajeLogLogin = splitLogLogin[0] + '\n\n' + splitLogLogin[1] + '\n' + splitLogLogin[2] + '\n' + splitLogLogin[3];
         alert(mensajeLogLogin);
 
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/inicio']);
         break;
 
       }
@@ -141,7 +142,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         const mensajeLogLogin = splitLogLogin[0] + '\n\n' + splitLogLogin[1] + '\n' + splitLogLogin[2] + '\n' + splitLogLogin[3];
         alert(mensajeLogLogin);
 
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/inicio']);
         break;
       }
       case 'L4': {
