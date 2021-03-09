@@ -1,0 +1,226 @@
+<form [formGroup]="formPersonas">
+    <div formArrayName="datosPersona">
+    
+      <div *ngFor="let item of datosPersonaArray.controls; let i = index" [formGroupName]="i" class="row form">
+    
+        <div class="col-sm-2 form-group">
+    
+          <mat-form-field class="example-full-width">
+            <input matInput 
+            #input maxlength="13"
+            placeholder="Cédula"
+            name="cedula"
+            formControlName="cedula"
+            (keyup)="buscarSocio($event.target.value)"
+            >
+            <mat-hint align="end">{{input.value?.length || 0}}/13</mat-hint>
+            <mat-error *ngIf="item.controls.cedula.invalid">
+              Ingrese <strong> cédula *</strong>
+            </mat-error>
+            <mat-error *ngIf="item.controls.cedula.min">
+              Ingrese <strong> un número válido *</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+        
+        <div class="col-sm-2 form-group">
+          <mat-form-field class="example-full-width">
+            <input 
+            matInput 
+            name="nombres"
+            formControlName="nombres" 
+            placeholder="Nombres"
+            value="{{ personas.nombres }}"
+            >
+            <mat-error *ngIf="item.controls.nombres.invalid">
+              Ingrese <strong>nombres completos *</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-sm-2 form-group">
+          <mat-form-field class="example-full-width">
+            <input matInput 
+            name="correo"
+            placeholder="Correo" 
+            formControlName="correo"
+            value="{{ personas.correo }}"
+            >
+            <mat-error *ngIf="item.controls.correo.hasError('email') && !item.controls.correo.hasError('required')">
+              Porfavor ingrese in correo válido
+            </mat-error>
+            <mat-error *ngIf="item.controls.correo.hasError('required')">
+              Ingrese <strong>correo *</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-sm-2 form-group">
+          <mat-form-field class="example-full-width">
+            <input matInput 
+            name="telefono"
+            placeholder="Telefono"
+            formControlName="telefono"
+            value="{{ personas.telefono }} / {{ personas.celular }}"
+            >
+            <mat-error *ngIf="item.controls.telefono.invalid">
+              Ingrese <strong> teléfono *</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      
+        <div class="col-sm-3 form-group">
+          <mat-form-field class="example-full-width">
+            <textarea matInput 
+            placeholder="Dirección"
+            formControlName="direccion"
+            value="{{ personas.direccion }}"
+            ></textarea>
+            <mat-error *ngIf="item.controls.direccion.invalid">
+              Ingrese <strong> dirección *</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-sm-1">
+          <div class="pt-5">
+            <button mat-icon-button color="primary" (click)="nuevoFormularioPersona()">
+              <mat-icon>add_box</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="eliminarFormularioPersona(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</form>
+
+
+
+<!-- 
+<form [formGroup]="formulario" (ngSubmit)="onFormSubmit()">
+  <div formArrayName="formularioPersonas">
+
+    <div *ngFor="let form of formularioPersonas.controls; index as idx" class="row form">
+      
+      <div class="col-sm-2 form-group">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Cédula"
+          (blur)="buscarSocio($event)"
+          [formControlName]="idx"
+          >
+          <mat-error *ngIf="form.invalid">
+            Ingrese <strong> cédula *</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-2 form-group">
+        <mat-form-field class="example-full-width">
+          <input matInput [formControlName]="idx" placeholder="Nombres">
+          <mat-error *ngIf="form.invalid">
+            Campo <strong>obligatorio *</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-2 form-group">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Correo" [formControl]="emailFormControl"
+          >
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Porfavor ingrese in correo válido
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Ingrese <strong>nombres *</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-2 form-group">
+        <mat-form-field class="example-full-width">
+          <input matInput 
+          placeholder="Telefono"
+          [formControlName]="idx"
+          >
+          <mat-error *ngIf="form.invalid">
+            Ingrese <strong> teléfono *</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    
+      <div class="col-sm-2 form-group">
+        <mat-form-field class="example-full-width">
+          <textarea matInput 
+          placeholder="Dirección"
+          [formControlName]="idx"
+          ></textarea>
+          <mat-error *ngIf="form.invalid">
+            Ingrese <strong> dirección *</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-2">
+        <div class="pt-5">
+          <button mat-icon-button color="primary" (click)="addNameField()" aria-label="Example icon button with a home icon">
+            <mat-icon>add_box</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteNameField(idx)" aria-label="Example icon button with a home icon">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div> 
+</form> -->
+
+
+<!-- <button (click)="addNameField()">Add</button> -->
+<!-- 
+<div  class="row form">
+
+  <div class="col form-group">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Cédula"
+      (blur)="buscarSocio($event)"
+      >
+    </mat-form-field>
+  </div>
+  
+  <div class="col form-group">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Nombres">
+    </mat-form-field>
+  </div>
+
+  <div class="col form-group">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Correo" [formControl]="emailFormControl"
+      >
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Porfavor ingrese in correo válido
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Correo es <strong>necesario</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col form-group">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Telefono" value="">
+    </mat-form-field>
+  </div>
+
+  <div class="col form-group">
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Dirección"></textarea>
+    </mat-form-field>
+  </div>
+ 
+</div> -->

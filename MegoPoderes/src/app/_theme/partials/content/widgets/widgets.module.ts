@@ -43,7 +43,6 @@ import { TilesWidget13Component } from './tiles/tiles-widget13/tiles-widget13.co
 import { TilesWidget14Component } from './tiles/tiles-widget14/tiles-widget14.component';
 // Other
 import { DropdownMenusModule } from '../dropdown-menus/dropdown-menus.module';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { Widget3DropdownComponent } from './lists/lists-widget3/widget3-dropdown/widget3-dropdown.component';
 import { Widget4DropdownComponent } from './lists/lists-widget4/widget4-dropdown/widget4-dropdown.component';
 
@@ -98,7 +97,6 @@ import { Widget4DropdownComponent } from './lists/lists-widget4/widget4-dropdown
     DropdownMenusModule,
     InlineSVGModule,
     NgApexchartsModule,
-    NgbDropdownModule,
   ],
   exports: [
     // Advanced Tables

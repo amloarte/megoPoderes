@@ -1,61 +1,123 @@
-<!--begin::Container-->
 <div
-  [ngClass]="headerContainerCSSClasses"
-  class="d-flex align-items-stretch justify-content-between"
+  class="subheader py-2 py-lg-6"
+  [ngClass]="subheaderCSSClasses"
+  id="kt_subheader"
 >
-  <ng-container *ngIf="loader$ | async as _loader">
-    <ngb-progressbar
-      class="loading-bar"
-      height="3px"
-      [value]="_loader"
-    ></ngb-progressbar>
-  </ng-container>
-
-  <ng-container *ngIf="headerMenuSelfDisplay">
-    <!--begin::Header Menu Wrapper-->
-    <div
-      class="header-menu-wrapper header-menu-wrapper-left"
-      id="kt_header_menu_wrapper"
-    >
-      <ng-container *ngIf="!asideSelfDisplay">
-        <!--begin::Header Logo-->
-        <div class="header-logo">
-          <a routerLink="/">
-            <img alt="Logo" [attr.src]="headerLogo" />
-          </a>
-        </div>
-        <!--end::Header Logo-->
+  <div
+    [ngClass]="subheaderContainerCSSClasses"
+    class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap"
+  >
+    <!--begin::Info-->
+    <div class="d-flex align-items-center flex-wrap mr-1">
+      <ng-container *ngIf="subheaderMobileToggle">
+        <!--begin::Mobile Toggle-->
+        <button
+          class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none"
+          id="kt_subheader_mobile_toggle"
+        >
+          <span></span>
+        </button>
+        <!--end::Mobile Toggle-->
       </ng-container>
 
-      <!--begin::Header Menu-->
-      <!-- Don't change id => 'kt_header_menu' -->
-      <ng-container *ngIf="headerMenuSelfStatic">
-        <!-- STATIC MENU -->
-        <app-header-menu
-          #ktHeaderMenu
-          id="kt_header_menu"
-          class="header-menu header-menu-mobile"
-          [ngClass]="headerMenuCSSClasses"
-        ></app-header-menu>
-      </ng-container>
-      <ng-container *ngIf="!headerMenuSelfStatic">
-        <!-- DYNAMIC MENU -->
-        <app-header-menu-dynamic
-          #ktHeaderMenu
-          id="kt_header_menu"
-          class="header-menu header-menu-mobile"
-          [ngClass]="headerMenuCSSClasses"
-        ></app-header-menu-dynamic>
-      </ng-container>
-      <!--end::Header Menu-->
+      <!--begin::Page Heading-->
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <!--begin::Page Title-->
+        <ng-container *ngIf="title$ | async as _title">
+          <h5 class="text-dark font-weight-bold my-1 mr-5">
+            {{ _title }}
+            <ng-container *ngIf="subheaderDisplayDesc">
+              <ng-container *ngIf="description$ | async as _description">
+                <small>{{ _description }}</small>
+              </ng-container>
+            </ng-container>
+          </h5>
+        </ng-container>
+        <!--end::Page Title-->
+
+        <!--begin::Breadcrumb-->
+        <ul
+          class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm"
+        >
+          <li
+            class="breadcrumb-item"
+            *ngFor="let bc of breadcrumbs"
+            routerLinkActive="active"
+          >
+            <a [routerLink]="bc.linkPath" class="text-muted">
+              {{ bc.linkText }}
+            </a>
+          </li>
+        </ul>
+        <!--end::Breadcrumb-->
+      </div>
+      <!--end::Page Heading-->
     </div>
-    <!--end::Header Menu Wrapper-->
-  </ng-container>
+    <!--end::Info-->
 
-  <ng-container *ngIf="!headerMenuSelfDisplay">
-    <div></div>
-  </ng-container>
+    <!--begin::Toolbar-->
+    <div class="d-flex align-items-center">
+      <ng-container *ngIf="subheaderDisplayDaterangepicker">
+        <!--begin::Daterange-->
+        <a
+          class="btn btn-light-primary btn-sm font-weight-bold mr-2 cursor-pointer"
+          id="kt_dashboard_daterangepicker"
+          data-toggle="tooltip"
+          title="Select dashboard daterange"
+          data-placement="left"
+        >
+          <span
+            class="opacity-60 font-weight-bold mr-2"
+            id="kt_dashboard_daterangepicker_title"
+            >Today</span
+          >
+          <span class="font-weight-bold" id="kt_dashboard_daterangepicker_date"
+            >Aug 16</span
+          >
+        </a>
+        <!--end::Daterange-->
+      </ng-container>
+      <ng-container *ngIf="!subheaderDisplayDaterangepicker">
+        <!--begin::Actions-->
+        <a
+          class="btn btn-light-primary font-weight-bolder btn-sm cursor-pointer"
+        >
+          Actions
+        </a>
+        <!--end::Actions-->
+      </ng-container>
 
-  <!-- <app-topbar class="topbar"></app-topbar> -->
+      <!--begin::Dropdown-->
+      <div
+        class="dropdown dropdown-inline"
+        data-toggle="tooltip"
+        title="Quick actions"
+        placement="bottom-right"
+        ngbDropdown
+      >
+        <a
+          class="btn btn-icon cursor-pointer"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          ngbDropdownToggle
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
+            cacheSVG="true"
+            class="svg-icon svg-icon-success svg-icon-2x"
+          ></span>
+        </a>
+        <div
+          class="dropdown-menu dropdown-menu-md dropdown-menu-right p-0 m-0"
+          ngbDropdownMenu
+        >
+          <!-- <app-dropdown-menu1></app-dropdown-menu1> -->
+        </div>
+      </div>
+      <!--end::Dropdown-->
+    </div>
+    <!--end::Toolbar-->
+  </div>
 </div>
-<!--end::Container-->
+<!--end::Subheader-->

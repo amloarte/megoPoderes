@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { SubheaderService } from './../../../../../_theme/partials/layout/subheader/_services/subheader.service';
+import { BreadcrumbItemModel } from './../../../../../_theme/partials/layout/subheader/_models/breadcrumb-item.model';
+import { Observable } from 'rxjs';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { LayoutService } from '../../../../../_theme/core';
-
-function getCurrentURL(location) {
-  return location.split(/[?#]/)[0];
-}
 
 @Component({
   selector: 'app-header-menu',
@@ -12,42 +11,41 @@ function getCurrentURL(location) {
   styleUrls: ['./header-menu.component.scss'],
 })
 export class HeaderMenuComponent implements OnInit {
-  ulCSSClasses: string;
-  rootArrowEnabled: boolean;
-  location: Location;
-  headerMenuDesktopToggle: string;
+  subheaderCSSClasses = '';
+  subheaderContainerCSSClasses = '';
+  subheaderMobileToggle = false;
+  subheaderDisplayDesc = false;
+  subheaderDisplayDaterangepicker = false;
+  title$: Observable<string>;
+  breadcrumbs$: Observable<BreadcrumbItemModel[]>;
+  breadcrumbs: BreadcrumbItemModel[] = [];
+  description$: Observable<string>;
+  @Input() title: string;
 
-  constructor(private layout: LayoutService, private loc: Location) {
-    this.location = this.loc;
+  constructor(
+    private layout: LayoutService,
+    private subheader: SubheaderService,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.title$ = this.subheader.titleSubject.asObservable();
   }
 
-  ngOnInit(): void {
-    this.ulCSSClasses = this.layout.getStringCSSClasses('header_menu_nav');
-    this.rootArrowEnabled = this.layout.getProp('header.menu.self.rootArrow');
-    this.headerMenuDesktopToggle = this.layout.getProp(
-      'header.menu.desktop.toggle'
+  ngOnInit() {
+    this.title$ = this.subheader.titleSubject.asObservable();
+    this.breadcrumbs$ = this.subheader.breadCrumbsSubject.asObservable();
+    this.description$ = this.subheader.descriptionSubject.asObservable();
+    this.subheaderCSSClasses = this.layout.getStringCSSClasses('subheader');
+    this.subheaderContainerCSSClasses = this.layout.getStringCSSClasses(
+      'subheader_container'
     );
-  }
-
-  getMenuItemActive(url) {
-    return this.checkIsActive(url) ? 'menu-item-active' : '';
-  }
-
-  checkIsActive(url) {
-    const location = this.location.path();
-    const current = getCurrentURL(location);
-    if (!current || !url) {
-      return false;
-    }
-
-    if (current === url) {
-      return true;
-    }
-
-    if (current.indexOf(url) > -1) {
-      return true;
-    }
-
-    return false;
-  }
+    this.subheaderMobileToggle = this.layout.getProp('subheader.mobileToggle');
+    this.subheaderDisplayDesc = this.layout.getProp('subheader.displayDesc');
+    this.subheaderDisplayDaterangepicker = this.layout.getProp(
+      'subheader.displayDaterangepicker'
+    );
+    this.breadcrumbs$.subscribe((res) => {
+      this.breadcrumbs = res;
+      this.cdr.detectChanges();
+    });
+  }  
 }

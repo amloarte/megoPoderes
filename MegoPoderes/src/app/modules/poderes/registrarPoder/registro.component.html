@@ -1,19 +1,151 @@
-<div class="card">
-    <div>
+<div class="container-fluid">
+  <div class="row">
+    <mat-card>
+      <mat-card-title>Titular</mat-card-title>
+      <mat-card-subtitle>Registro de socios</mat-card-subtitle>
+      <mat-card-content>
+        <app-formulario-persona></app-formulario-persona>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-    </div>
-    <div class="card-body">
-        <div class="example-container">
-            <mat-form-field>
-              <input
-                matInput
-                placeholder="Enter your email"
-                required
-              />
-              <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
-            </mat-form-field>
+  <div class="row mt-5">
+    <mat-card>
+      <mat-card-title>Beneficiario</mat-card-title>
+      <mat-card-subtitle>Registro de beneficiarios</mat-card-subtitle>
+      <mat-card-content>
+        <app-formulario-persona></app-formulario-persona>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="row mt-5">
+    <mat-card>
+      <mat-card-title>Otorgamiento</mat-card-title>
+      <mat-card-subtitle
+        >Registro del otorgamiento al beneficiario</mat-card-subtitle
+      >
+      <mat-card-content>
+        <form>
+          <div class="row">
+            <div class="col-md-3">
+              <mat-form-field>
+                <mat-select
+                  [formControl]="select" required
+                  placeholder="Seleccione Pais"
+                  [(ngModel)]="selectedValue"
+                  (change)="selectCascada('provincia', selectedValue)"
+                >
+                  <mat-option> -SELECCIONE- </mat-option>
+                  <mat-option *ngFor="let pais of paises"
+                    [value]="pais.codigo"
+                    
+                  >
+                    {{ pais.pais }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="select.hasError('required')">Seleccione provincia <span>*</span></mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-select placeholder="Seleccione provincia" name="provincia">
+                  <mat-option>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-select placeholder="Seleccione ciudad" name="ciudad">
+                  <mat-option> </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  placeholder="Fecha de otorgamiento"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input
+                  matInput
+                  [matDatepicker]="picker2"
+                  placeholder="Fecha de vencimiento"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker2"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input
+                  matInput
+                  [matDatepicker]="picker3"
+                  placeholder="Fecha de notificacion a la Cooperativa"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker3"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+
+              <mat-form-field>
+                <mat-select placeholder="Instancia en la que se otrogo el Poder" name="instanciaPoder">
+                  <mat-option> </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <textarea matInput 
+              placeholder="Especifique"
+              formControlName="descripcionInstancia"
+              ></textarea>
+
+              <mat-form-field>
+                <mat-select placeholder="Oficina" name="oficina">
+                  <mat-option  *ngFor="let oficina of oficinas" [value]="oficina.codigo">
+                  {{ oficina.descripcion }}  
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+            <div class="col-3">
+
+              <mat-radio-group>
+                <div class="mb-3">
+                  <mat-label>Facultades concedidas a los mandatarios de forma:</mat-label>
+                </div>
+                <mat-radio-button value="1">General</mat-radio-button>
+                <mat-radio-button value="2">Específico</mat-radio-button>
+              </mat-radio-group>
+
+            </div>
+            
           </div>
-
-
-    </div>
+          <div class="row">
+            <div class="col">
+              <mat-radio-group>
+                <mat-label >Tipo Poder</mat-label> <br>
+                <mat-radio-button value="1">General</mat-radio-button>
+                <mat-radio-button value="2">Específico</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
