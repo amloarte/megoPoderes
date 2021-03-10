@@ -1,5 +1,6 @@
 ﻿using System.Web.Http.Cors;
 using System.Web.Http;
+using wsPoderes.App_Start;
 
 namespace wsPoderes
 {
@@ -8,7 +9,7 @@ namespace wsPoderes
         public static void Register(HttpConfiguration config)
         {
             // Configuración y servicios de API web
-            config.EnableCors(new EnableCorsAttribute(origins: "http://localhost:4200", headers: "*", methods: "*"));
+            config.EnableCors(new AccessPolicyCors());
 
             //Validación de autenticidad
             config.Filters.Add(new BasicAuthorization());
@@ -16,7 +17,7 @@ namespace wsPoderes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
+                name: "DefaultApi", 
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );

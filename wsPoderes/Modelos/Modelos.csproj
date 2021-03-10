@@ -44,8 +44,9 @@
     <Compile Include="Documento.cs" />
     <Compile Include="Poder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RespuestaTransaccion.cs" />
     <Compile Include="Revocatoria.cs" />
-    <Compile Include="Titular.cs" />
+    <Compile Include="Persona.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

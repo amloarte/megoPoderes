@@ -1,5 +1,5 @@
 D:\REPOSITORIOS\PODERES\wsPoderes\Modelos\bin\Debug\Modelos.dll
 D:\REPOSITORIOS\PODERES\wsPoderes\Modelos\bin\Debug\Modelos.pdb
-D:\REPOSITORIOS\PODERES\wsPoderes\Modelos\obj\Debug\Modelos.csprojAssemblyReference.cache
 D:\REPOSITORIOS\PODERES\wsPoderes\Modelos\obj\Debug\Modelos.dll
 D:\REPOSITORIOS\PODERES\wsPoderes\Modelos\obj\Debug\Modelos.pdb
+D:\REPOSITORIOS\PODERES\wsPoderes\Modelos\obj\Debug\Modelos.csprojAssemblyReference.cache

@@ -150,8 +150,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AccessPolicyCors.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BasicAuthorization.cs" />
+    <Compile Include="Controllers\CatalogosController.cs" />
+    <Compile Include="Controllers\PersonaController.cs" />
+    <Compile Include="Controllers\PoderesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -170,10 +174,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Modelos\Modelos.csproj">
+      <Project>{10f69e71-2af0-4a21-9f81-abcf8ab639f1}</Project>
+      <Name>Modelos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Negocio\Negocio.csproj">
+      <Project>{554e382d-e937-45b6-99f0-38e2dde470b8}</Project>
+      <Name>Negocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

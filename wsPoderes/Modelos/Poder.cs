@@ -8,7 +8,7 @@ namespace Modelos
 {
     public class Poder
     {
-        public int int_id { get; set; }
+        //public int int_id { get; set; }
         public int int_tipo { get; set; }
         public string str_fechaModificacion { get; set; }
         public string str_fechaOtorgamiento { get; set; }

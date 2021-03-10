@@ -16,6 +16,7 @@ namespace Modelos
         public int int_estado { get; set; }
         public int int_Oficina { get; set; }
         public List<string> lst_doc_alfresco { get; set; }
-        public List<Poder> lst_poder {get; set;}
+        public List<Poder> lst_tipo_doc {get; set;}
+        public List<Persona> lst_personas { get; set; }
     }
 }
