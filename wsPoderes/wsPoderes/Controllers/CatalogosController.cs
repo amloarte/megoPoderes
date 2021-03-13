@@ -49,5 +49,26 @@ namespace wsPoderes.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        [Route("api/getUbicacionUsuario")]
+        [HttpGet]
+        public IHttpActionResult getUbicacionUsuario(int int_id_oficina)
+        {
+            try
+            {
+
+                RespuestaTransaccion respuesta = new RespuestaTransaccion();
+                NegCatalogos neg = new NegCatalogos();
+                respuesta = neg.getUbicacionUsuario(int_id_oficina);
+                return Ok(respuesta);
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
     }
+
+
 }

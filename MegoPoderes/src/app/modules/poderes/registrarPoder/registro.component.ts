@@ -1,6 +1,6 @@
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CatalogosService } from './../_services/catalogos.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-registro',
@@ -8,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./registro.component.scss']
 })
 export class RegistroComponent implements OnInit {
+  @Input() oficina: number;
+  @Input() titular: [];
+  @Input() beneficiario: [];
+  @Input() facultades: [];
+  @Input() fechasPoderes: [];
 
-  selectedValue: string;
-  paises: [] = [];
-  provincias: [] = [];
   fomularioRegistro: FormGroup;
-  oficinas: [] = [];
+  instituciones: [] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,34 +23,23 @@ export class RegistroComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    this.fomularioRegistro = this.formBuilder.group({
-      paises: new FormControl(this.paises, Validators.required),
-      selectPaises: new FormControl('seleccione pais', Validators.required),
-      fechaOtorgamiento: new FormControl('', Validators.required)
-    });
-
-    this.selectCascada('paises', '0');
-    this.getCatalogos('oficina', '0');
-
-    // this.serviceCatalogos.getParametros('FACULTADES_PODERES').then((resp) => {
-    //   console.log(resp);
-    // });
+    this.formularioRegistro();
+    this.getParametros('INSTITUCIONES');
   }
 
-
-  selectCascada(nombre: string, filtro: string) {
-    this.serviceCatalogos.getCatalogos(nombre, filtro).then((resp: []) => {
-      this.paises = resp;
+  formularioRegistro(): FormGroup {
+    return this.fomularioRegistro = this.formBuilder.group({
+      
     });
   }
 
-  getCatalogos(nombre: string, filtro: string) {
-    this.serviceCatalogos.getCatalogos(nombre, filtro)
+  getParametros(nombre: string) {
+    this.serviceCatalogos.getParametros(nombre)
       .then((resp: []) => {
-        this.oficinas = resp;
+        this.instituciones = resp;
     });
   }
 
+  registrarPoder() {}
 
 }

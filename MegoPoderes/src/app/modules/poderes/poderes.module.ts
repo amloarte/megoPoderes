@@ -9,10 +9,10 @@ import { ValidacionComponent } from './validacion/validacion.component';
 
 /* Angular Material */
 // Popups & modals
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -52,6 +52,11 @@ import {
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FacultadesComponent } from './utils/facultades/facultades.component';
+import { DropdawnOficinasComponent } from './utils/dropdawn-oficinas/dropdawn-oficinas.component';
+import { DropdawCascadaPaisComponent } from './utils/dropdaw-cascada-pais/dropdaw-cascada-pais.component';
+import { FechasPoderesComponent } from './utils/fechas-poderes/fechas-poderes.component';
+import { SubirDocumentosComponent } from './utils/subir-documentos/subir-documentos.component';
 
 
 const routes: Routes = [
@@ -95,7 +100,12 @@ const routes: Routes = [
     AdministracionComponent,
     ValidacionComponent,
     FormularioPersonaComponent,
-    DashboardComponent
+    DashboardComponent,
+    FacultadesComponent,
+    DropdawnOficinasComponent,
+    DropdawCascadaPaisComponent,
+    FechasPoderesComponent,
+    SubirDocumentosComponent
   ],
   providers: [
     { provide: MatBottomSheetRef, useValue: {} },
@@ -139,7 +149,7 @@ const routes: Routes = [
     MatMomentDateModule,
     MatRippleModule,
     MatRadioModule,
-
+    MatCheckboxModule,
 
     RouterModule.forChild(routes),
     ReactiveFormsModule,

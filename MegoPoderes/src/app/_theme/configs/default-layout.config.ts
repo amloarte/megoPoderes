@@ -78,7 +78,7 @@ export const DefaultLayoutConfig = {
       theme: 'light', // light|dark
       fixed: {
         desktop: true,
-        mobile: true,
+        mobile: false,
       },
     },
 
@@ -96,7 +96,7 @@ export const DefaultLayoutConfig = {
         toggle: 'click',
         submenu: {
           theme: 'light',
-          arrow: true,
+          arrow: false,
         },
       },
 
@@ -169,7 +169,7 @@ export const DefaultLayoutConfig = {
 
   // Footer
   footer: {
-    display: true,
+    display: false,
     width: 'fluid',
     fixed: true,
   },
@@ -223,12 +223,12 @@ export const DefaultLayoutConfig = {
 
     // Languages
     languages: {
-      display: true,
+      display: false,
     },
 
     // Cart
     cart: {
-      display: true,
+      display: false,
       layout: 'dropdown', // offcanvas, dropdown,
       offcanvas: {
         direction: 'right',
@@ -240,7 +240,7 @@ export const DefaultLayoutConfig = {
 
     // Chat
     chat: {
-      display: true,
+      display: false,
     },
 
     // Quick Panel

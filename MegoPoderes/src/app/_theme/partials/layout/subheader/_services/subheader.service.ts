@@ -21,7 +21,7 @@ export class SubheaderService implements OnDestroy {
     string
   >('v1'); // [1-6]
   // private fields
-  private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
+  private unsubscribe: Subscription[] = [];
 
   constructor(private layout: LayoutService) {
     this.setDefaultSubheader();

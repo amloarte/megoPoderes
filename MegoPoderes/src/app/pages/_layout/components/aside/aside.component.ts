@@ -1,11 +1,11 @@
 import { Router } from '@angular/router';
 import { LoginService } from './../../../../modules/auth/_services/login.service';
-import { Funcionalidades } from './../../../../_theme/core/models/menu.model';
 import { Usuario } from './../../../../modules/auth/_models/usuario.model';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from '../../../../_theme/core';
 import { SidebarService } from 'src/app/_theme/core/services/sidebar.service';
+import { Funcionalidades } from 'src/app/models/menu.model';
 
 @Component({
   selector: 'app-aside',

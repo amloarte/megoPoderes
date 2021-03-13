@@ -1,5 +1,5 @@
 import { Observable, BehaviorSubject } from 'rxjs';
-import { URL_SERVICIOS, ID_SISTEMA, TERMINAL } from '../../../_theme/configs/config';
+import { URL_SERVICIOS, ID_SISTEMA, TERMINAL } from '../../../configs/config';
 import { Router } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';

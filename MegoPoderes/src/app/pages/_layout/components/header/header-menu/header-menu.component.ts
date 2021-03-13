@@ -18,6 +18,7 @@ export class HeaderMenuComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  // tslint:disable-next-line: use-lifecycle-interface
   ngAfterViewInit(): void {
 
     KTUtil.ready(() => {

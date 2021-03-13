@@ -43,5 +43,21 @@ namespace Negocio
             }
             return respuesta;
         }
+        
+        public RespuestaTransaccion getUbicacionUsuario(int int_id_oficina)
+        {
+            RespuestaTransaccion respuesta = new RespuestaTransaccion();
+            DatCatalogos catalogos = new DatCatalogos();
+            try
+            {
+                respuesta = catalogos.getUbicacionUsuario(int_id_oficina);
+            }
+            catch (Exception ex)
+            {
+                respuesta.codigo = "1";
+                respuesta.diccionario.Add("ERROR", ex.Message);
+            }
+            return respuesta;
+        }
     }
 }

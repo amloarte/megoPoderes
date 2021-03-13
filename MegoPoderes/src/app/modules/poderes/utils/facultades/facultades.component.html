@@ -1,0 +1,62 @@
+<div class="row form-group">
+
+  <mat-label class="col-2 align-self-center">Tipo Poder</mat-label> 
+  <div class="col-3">
+    <mat-radio-group>
+      <div class="p-5">
+        <mat-radio-button
+          (change)="$event ? masterToggle() : null"
+          [checked]="isAllSelected()"
+          [aria-label]="checkboxLabel()"
+          >
+          General 
+        </mat-radio-button>
+
+        <mat-radio-button 
+          (change)="$event ? masterToggle() : null"
+          [checked]="!isAllSelected()"
+          [aria-label]="checkboxLabel()"
+          >
+            Específico
+        </mat-radio-button>
+      </div>
+    </mat-radio-group>
+  </div>
+
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z6">
+
+    <!-- Checkbox  Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+       
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Nombre Facultades -->
+    <ng-container matColumnDef="prm_nemonico">
+      <td mat-header-cell *matHeaderCellDef> 
+        <mat-form-field class="example-full-width">
+          <mat-label>Buscar facultades</mat-label>
+          <input matInput class="example-full-width" (keyup)="applyFilter($event)" placeholder="digite para buscar facultades" #input>
+        </mat-form-field>
+       </td>
+      <td mat-cell *matCellDef="let element"> 
+        {{element.prm_nemonico}} 
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="selection.toggle(row)">
+    </tr>
+  </table>
+  <mat-paginator [length]="3000" [pageSizeOptions]="[5, 10]"></mat-paginator>

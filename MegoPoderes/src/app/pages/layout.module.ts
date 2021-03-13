@@ -13,8 +13,6 @@ import { HeaderMenuComponent } from './_layout/components/header/header-menu/hea
 import { ExtrasModule } from '../_theme/partials/layout/extras/extras.module';
 import { CoreModule } from '../_theme/core';
 import { SubheaderModule } from '../_theme/partials/layout/subheader/subheader.module';
-import { AsideDynamicComponent } from './_layout/components/aside-dynamic/aside-dynamic.component';
-import { HeaderMenuDynamicComponent } from './_layout/components/header/header-menu-dynamic/header-menu-dynamic.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +23,6 @@ import { HeaderMenuDynamicComponent } from './_layout/components/header/header-m
     FooterComponent,
     HeaderComponent,
     HeaderMenuComponent,
-    AsideDynamicComponent,
-    HeaderMenuDynamicComponent,
   ],
   imports: [
     CommonModule,

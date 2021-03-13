@@ -12,7 +12,11 @@ import { filter } from 'rxjs/operators';
 })
 export class SubheaderWrapperComponent implements OnInit, AfterViewInit {
   subheaderVersion$: Observable<string>;
-  constructor(private subheader: SubheaderService, private router: Router) {
+  constructor(
+    private subheader: SubheaderService,
+    private router: Router
+  ) {
+
     this.subheader.setDefaultSubheader();
     this.subheaderVersion$ = this.subheader.subheaderVersionSubject.asObservable();
 
@@ -26,6 +30,7 @@ export class SubheaderWrapperComponent implements OnInit, AfterViewInit {
     // subscribe to router events
     this.router.events
       .pipe(filter((event) => event instanceof ResolveEnd))
+      // tslint:disable-next-line: deprecation
       .subscribe(initSubheader);
   }
 

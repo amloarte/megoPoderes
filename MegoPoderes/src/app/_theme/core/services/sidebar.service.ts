@@ -1,10 +1,10 @@
 import { LoginService } from './../../../modules/auth/_services/login.service';
-import { Funcionalidades } from './../models/menu.model';
 import { Usuario } from './../../../modules/auth/_models/usuario.model';
 import { filter } from 'rxjs/operators';
 import { HttpParams, HttpClient } from '@angular/common/http';
-import { ID_SISTEMA, URL_SERVICIOS } from './../../configs/config';
+import { ID_SISTEMA, URL_SERVICIOS } from '../../../configs/config';
 import { Injectable } from '@angular/core';
+import { Funcionalidades } from 'src/app/models/menu.model';
 
 @Injectable({
   providedIn: 'root'

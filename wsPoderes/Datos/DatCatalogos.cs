@@ -67,5 +67,28 @@ namespace Datos
 			return respuesta;
 		}
 
+		public RespuestaTransaccion getUbicacionUsuario(int int_id_oficina)
+		{
+			RespuestaTransaccion respuesta = new RespuestaTransaccion();
+			try
+			{
+				objCliente.AddInParameter(new ParametersIn { StrNameParameter = "prm_id_oficina", dbType = DbType.Int32, objValue = int_id_oficina });
+				DataSet ds = objCliente.ExecuteDataSet("get_ubicacionUsuario", Convert.ToString(ConfigurationManager.AppSettings["BD_sistemas"]));
+
+				if (ds.Tables.Count > 0)
+				{
+					respuesta.cuerpo = ds.Tables[0];
+				}
+				respuesta.codigo = "0";
+				respuesta.diccionario.Add("ERROR", "");
+				objCliente.EmptyLists(); objCliente.Close();
+			}
+			catch (Exception ex)
+			{
+				respuesta.diccionario.Add("ERROR", ex.Message);
+				objCliente.Abort();
+			}
+			return respuesta;
+		}
 	}
 }

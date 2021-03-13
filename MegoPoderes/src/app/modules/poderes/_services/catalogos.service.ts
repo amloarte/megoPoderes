@@ -1,7 +1,7 @@
 import { RespuestaTransaccion } from './../../../models/RespuestaTransaccion.models';
 import { Router } from '@angular/router';
 import { HttpParams, HttpClient } from '@angular/common/http';
-import { URL_PODERES } from './../../../_theme/configs/config';
+import { URL_PODERES } from '../../../configs/config';
 import { Injectable } from '@angular/core';
 
 @Injectable({
